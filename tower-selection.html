@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tower Selection</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <!-- Link to CSS -->
+    <link
+      rel="stylesheet"
+      href="tower-selection.css"
+    />
+  </head>
+  <body>
+    <div class="interactive-map">
+      <!-- Background Image -->
+      <img
+        class="bg-image"
+        src="img/tower-select.webp"
+        alt="Background showing three towers"
+      />
+
+      <!-- TOWER I -->
+      <div
+        class="tower tower-1"
+        data-tower="I"
+      >
+        <!-- The building overlay (blend-mode: multiply) -->
+        <div class="hover-overlay">
+          <img
+            src="img/T1-hover.webp"
+            alt="Tower I"
+          />
+        </div>
+        <!-- Circle with tower label -->
+        <div class="circle">
+          <span class="tower-label">I</span>
+          <span class="plus-icon">+</span>
+        </div>
+        <!-- Popover content -->
+        <div class="popover">
+          <div class="popover-content">
+            <h2 class="heading-serif">TOWER I</h2>
+            <p class="status">SOLD OUT</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOWER II -->
+      <div
+        class="tower tower-2"
+        data-tower="II"
+      >
+        <div class="hover-overlay">
+          <img
+            src="img/T2-hover.webp"
+            alt="Tower II"
+          />
+        </div>
+        <div class="circle">
+          <span class="tower-label">II</span>
+          <span class="plus-icon">+</span>
+        </div>
+        <div class="popover">
+          <div class="popover-content">
+            <h2 class="heading-serif">TOWER II</h2>
+            <p class="description">x6 Apartments<br />671 – 149 m²</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOWER III -->
+      <div
+        class="tower tower-3"
+        data-tower="III"
+      >
+        <div class="hover-overlay">
+          <img
+            src="img/T3-hover.webp"
+            alt="Tower III"
+          />
+        </div>
+        <div class="circle">
+          <span class="tower-label">III</span>
+          <span class="plus-icon">+</span>
+        </div>
+        <div class="popover">
+          <div class="popover-content">
+            <h2 class="heading-serif">TOWER III</h2>
+            <p class="description">x5 Residences<br />2400 – 3850 SQ FT</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS File -->
+    <script src="tower-selection.js"></script>
+  </body>
+</html>

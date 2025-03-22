@@ -1,0 +1,265 @@
+/* FONT-FACES */
+@font-face {
+    font-family: 'Oranienbaum';
+    src: url('fonts/Oranienbaum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('fonts/Montserrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Raleway';
+    src: url('fonts/Raleway-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* RESET / BASE */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container for the background image and towers */
+.interactive-map {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* The main image (16:9). 
+   Make sure tower-select.webp is 16:9 so the hotspots align properly. */
+.bg-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+/* TOWER WRAPPER */
+.tower {
+    position: absolute;
+    /* Adjust positions so the overlay/circle lines up with each building */
+    z-index: 2;
+}
+
+/* EXAMPLE POSITIONS (tweak these) */
+.tower-1 {
+    top: 37%;
+    left: 29%;
+    transform: translate(-50%, -50%);
+}
+
+.tower-2 {
+    top: 33%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+}
+
+.tower-3 {
+    top: 29%;
+    left: 71%;
+    transform: translate(-50%, -50%);
+}
+
+/* BUILDING OVERLAY */
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: auto;
+    opacity: 0;
+    /* Hidden by default */
+    transition: opacity 0.3s ease;
+    width: 200px;
+    height: auto;
+}
+
+/* Apply blend mode to the image */
+.hover-overlay img {
+    max-width: 100%;
+    height: auto;
+    mix-blend-mode: multiply;
+}
+
+/* CIRCLE */
+.circle {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #8C7358;
+    /* Adjust to your brand color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    /* for the "white circle" expansion effect, you might do a pseudo-element */
+    transition: transform 0.3s ease;
+}
+
+.tower-label {
+    font-family: 'Oranienbaum', serif;
+    font-size: 18px;
+    color: #fff;
+    z-index: 2;
+}
+
+.plus-icon {
+    position: absolute;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #fff;
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* POPOVER */
+.popover {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    width: 260px;
+    background-color: #1D1C2B;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    /* So it vanishes on mouseleave */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.popover-content {
+    font-family: 'Raleway', sans-serif;
+}
+
+.heading-serif {
+    font-family: 'Oranienbaum', serif;
+    font-size: 24px;
+    margin: 0 0 10px;
+}
+
+.description {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    margin: 0;
+}
+
+.status {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: #fff;
+    margin: 0;
+}
+
+/* HOVER & INTERACTION */
+.tower:hover .hover-overlay {
+    opacity: 1;
+}
+
+.tower:hover .circle {
+    transform: scale(1.1);
+}
+
+.tower:hover .circle .plus-icon {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.tower:hover .popover {
+    /* position near the circle; adjust offsets as needed */
+    top: 0;
+    left: 60px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.tower.active .popover {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* You can also update any styles for the hover-overlay if needed */
+.tower.active .hover-overlay {
+    /* example: change brightness */
+    filter: brightness(1.1);
+}
+
+/* Ensure the background image is behind the towers */
+.bg-image {
+    position: relative;
+    z-index: 1;
+}
+
+/* Make sure towers (and their overlays) are above the background */
+.tower {
+    position: absolute;
+    /* already set */
+    z-index: 2;
+}
+
+/* Common styling for the overlay */
+.tower .hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    mix-blend-mode: multiply;
+    /* Remove fixed pixel width so it can be defined per tower */
+    height: auto;
+}
+
+/* Individual positioning for each tower's overlay */
+.tower-1 .hover-overlay {
+    /* Adjust these values to precisely position Tower I's overlay */
+    top: -2%;
+    left: -414%;
+    width: 518%;
+}
+
+.tower-2 .hover-overlay {
+    /* Adjust these values to precisely position Tower II's overlay */
+    top: -19%;
+    left: -305%;
+    width: 360%;
+}
+
+.tower-3 .hover-overlay {
+    /* Adjust these values to precisely position Tower III's overlay */
+    top: 8%;
+    left: -298%;
+    width: 352%;
+}
+
+/* When hovering over a tower, show its overlay */
+.tower:hover .hover-overlay {
+    opacity: 1;
+}
+
+/* MEDIA QUERY (optional)
+   If you want to hide or block usage in portrait mode on mobile:
+*/
+@media screen and (orientation: portrait) {
+    .interactive-map {
+        display: none;
+    }
+
+    /* Show a rotate device message if desired */
+}
