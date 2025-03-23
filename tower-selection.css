@@ -1,265 +1,280 @@
-/* FONT-FACES */
+/* Font declarations */
 @font-face {
     font-family: 'Oranienbaum';
-    src: url('fonts/Oranienbaum-Regular.woff') format('woff');
+    src: url('fonts/Oranienbaum-Regular.woff2') format('woff2'),
+        url('fonts/Oranienbaum-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('fonts/Montserrat-Regular.woff') format('woff');
+    src: url('fonts/Montserrat-Regular.woff2') format('woff2'),
+        url('fonts/Montserrat-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Raleway';
-    src: url('fonts/Raleway-Regular.woff') format('woff');
+    src: url('fonts/Raleway-Regular.woff2') format('woff2'),
+        url('fonts/Raleway-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
-/* RESET / BASE */
-html,
-body {
+/* Reset and base styles */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Container for the background image and towers */
-.interactive-map {
-    position: relative;
+body,
+html {
     width: 100%;
-    height: auto;
+    height: 100%;
     overflow: hidden;
-    isolation: isolate;
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* The main image (16:9). 
-   Make sure tower-select.webp is 16:9 so the hotspots align properly. */
-.bg-image {
-    width: 100%;
-    height: auto;
-    display: block;
+/* Main container with fixed aspect ratio */
+.tower-selection-container {
     position: relative;
-    z-index: 1;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    /* 16:9 aspect ratio */
+    background-image: url('img/tower-select.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
 }
 
-/* TOWER WRAPPER */
+/* Tower styles */
 .tower {
     position: absolute;
-    /* Adjust positions so the overlay/circle lines up with each building */
-    z-index: 2;
+    cursor: pointer;
+    transform-origin: center;
 }
 
-/* EXAMPLE POSITIONS (tweak these) */
+/* Tower I (Sold Out) */
 .tower-1 {
-    top: 37%;
-    left: 29%;
-    transform: translate(-50%, -50%);
+    top: 28.5%;
+    left: 11.6%;
+    width: 19.5%;
+    height: 45%;
 }
 
+/* Tower II */
 .tower-2 {
-    top: 33%;
-    left: 52%;
-    transform: translate(-50%, -50%);
+    top: 24.5%;
+    left: 38.5%;
+    width: 14%;
+    height: 35%;
 }
 
+/* Tower III */
 .tower-3 {
-    top: 29%;
-    left: 71%;
-    transform: translate(-50%, -50%);
+    top: 22.6%;
+    left: 57.6%;
+    width: 13.6%;
+    height: 30%;
 }
 
-/* BUILDING OVERLAY */
-.hover-overlay {
+/* SVG Overlays */
+.overlay {
     position: absolute;
     top: 0;
     left: 0;
-    pointer-events: auto;
+    width: 100%;
+    height: 100%;
     opacity: 0;
-    /* Hidden by default */
     transition: opacity 0.3s ease;
-    width: 200px;
-    height: auto;
-}
-
-/* Apply blend mode to the image */
-.hover-overlay img {
-    max-width: 100%;
-    height: auto;
     mix-blend-mode: multiply;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
-/* CIRCLE */
-.circle {
+.overlay-t1 {
+    background-image: url('img/T1-hover.svg');
+}
+
+.overlay-t2 {
+    background-image: url('img/T2-hover.svg');
+}
+
+.overlay-t3 {
+    background-image: url('img/T3-hover.svg');
+}
+
+.tower:hover .overlay,
+.tower.active .overlay {
+    opacity: 1;
+}
+
+/* Tower content (circle + popover) */
+.tower-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Tower circle */
+.tower-circle {
     position: relative;
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background-color: #8C7358;
-    /* Adjust to your brand color */
+    background-color: #1D1C2B;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    /* for the "white circle" expansion effect, you might do a pseudo-element */
     transition: transform 0.3s ease;
+    z-index: 2;
 }
 
-.tower-label {
+.tower-number {
+    color: white;
     font-family: 'Oranienbaum', serif;
-    font-size: 18px;
-    color: #fff;
-    z-index: 2;
+    font-size: 28px;
+}
+
+.hover-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .plus-icon {
-    position: absolute;
-    font-family: 'Arial', sans-serif;
-    font-size: 24px;
-    color: #fff;
+    opacity: 0;
+    font-size: 28px;
+    color: #1D1C2B;
     transform: scale(0);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* POPOVER */
-.popover {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-    width: 260px;
-    background-color: #1D1C2B;
-    color: #fff;
-    opacity: 0;
-    transform: translateY(15px);
     transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none;
-    /* So it vanishes on mouseleave */
-    padding: 20px;
-    box-sizing: border-box;
 }
 
-.popover-content {
-    font-family: 'Raleway', sans-serif;
-}
-
-.heading-serif {
-    font-family: 'Oranienbaum', serif;
-    font-size: 24px;
-    margin: 0 0 10px;
-}
-
-.description {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    margin: 0;
-}
-
-.status {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    color: #fff;
-    margin: 0;
-}
-
-/* HOVER & INTERACTION */
-.tower:hover .hover-overlay {
-    opacity: 1;
-}
-
-.tower:hover .circle {
+.tower:hover .tower-circle,
+.tower.active .tower-circle {
     transform: scale(1.1);
 }
 
-.tower:hover .circle .plus-icon {
+.tower:hover .hover-circle,
+.tower.active .hover-circle {
+    width: 60px;
+    height: 60px;
+    opacity: 1;
+}
+
+.tower:hover .plus-icon,
+.tower.active .plus-icon {
+    opacity: 1;
     transform: scale(1);
-    opacity: 1;
 }
 
-.tower:hover .popover {
-    /* position near the circle; adjust offsets as needed */
-    top: 0;
-    left: 60px;
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.tower.active .popover {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* You can also update any styles for the hover-overlay if needed */
-.tower.active .hover-overlay {
-    /* example: change brightness */
-    filter: brightness(1.1);
-}
-
-/* Ensure the background image is behind the towers */
-.bg-image {
-    position: relative;
-    z-index: 1;
-}
-
-/* Make sure towers (and their overlays) are above the background */
-.tower {
+/* Tower popover */
+.tower-popover {
     position: absolute;
-    /* already set */
-    z-index: 2;
-}
-
-/* Common styling for the overlay */
-.tower .hover-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: auto;
+    top: 50%;
+    left: calc(100% + 10px);
+    transform: translateY(-50%) translateX(10px);
+    background-color: #1D1C2B;
+    color: white;
+    padding: 20px 25px;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    mix-blend-mode: multiply;
-    /* Remove fixed pixel width so it can be defined per tower */
-    height: auto;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    min-width: 220px;
+    text-align: center;
+    z-index: 3;
+    border-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Individual positioning for each tower's overlay */
-.tower-1 .hover-overlay {
-    /* Adjust these values to precisely position Tower I's overlay */
-    top: -2%;
-    left: -414%;
-    width: 518%;
+.tower-numeral {
+    font-family: 'Oranienbaum', serif;
+    font-size: 60px;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.85);
 }
 
-.tower-2 .hover-overlay {
-    /* Adjust these values to precisely position Tower II's overlay */
-    top: -19%;
-    left: -305%;
-    width: 360%;
+.tower-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.tower-3 .hover-overlay {
-    /* Adjust these values to precisely position Tower III's overlay */
-    top: 8%;
-    left: -298%;
-    width: 352%;
+.divider {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin: 10px 0 15px;
 }
 
-/* When hovering over a tower, show its overlay */
-.tower:hover .hover-overlay {
+.tower-details {
+    margin-top: 5px;
+}
+
+.tower-details p {
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+.tower-popover .sold-out {
+    font-family: 'Oranienbaum', serif;
+    font-size: 22px;
+    color: #FF9090;
+    margin-top: 5px;
+}
+
+.tower:hover .tower-popover,
+.tower.active .tower-popover {
     opacity: 1;
+    transform: translateY(-50%) translateX(0);
 }
 
-/* MEDIA QUERY (optional)
-   If you want to hide or block usage in portrait mode on mobile:
-*/
-@media screen and (orientation: portrait) {
-    .interactive-map {
-        display: none;
+/* Mobile portrait mode warning */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    .tower-selection-container::before {
+        content: 'Please rotate your device to landscape mode for the interactive tower selection';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        z-index: 100;
+        font-family: 'Montserrat', sans-serif;
     }
-
-    /* Show a rotate device message if desired */
 }

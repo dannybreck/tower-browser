@@ -1,101 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Tower Selection</title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <!-- Link to CSS -->
-    <link
-      rel="stylesheet"
-      href="tower-selection.css"
-    />
-  </head>
-  <body>
-    <div class="interactive-map">
-      <!-- Background Image -->
-      <img
-        class="bg-image"
-        src="img/tower-select.webp"
-        alt="Background showing three towers"
-      />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marina Pointe - Tower Selection</title>
+    <link rel="stylesheet" href="tower-selection.css">
+</head>
+<body>
+    <div class="tower-selection-container">
+        <!-- Tower I (Sold Out) -->
+        <div class="tower tower-1">
+            <div class="overlay overlay-t1"></div>
+            <div class="tower-content">
+                <div class="tower-circle">
+                    <span class="tower-number">I</span>
+                    <div class="hover-circle">
+                        <span class="plus-icon">+</span>
+                    </div>
+                </div>
+                <div class="tower-popover">
+                    <div class="tower-numeral">I</div>
+                    <div class="tower-label">TOWER</div>
+                    <div class="divider"></div>
+                    <div class="tower-details">
+                        <p class="sold-out">SOLD OUT</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-      <!-- TOWER I -->
-      <div
-        class="tower tower-1"
-        data-tower="I"
-      >
-        <!-- The building overlay (blend-mode: multiply) -->
-        <div class="hover-overlay">
-          <img
-            src="img/T1-hover.webp"
-            alt="Tower I"
-          />
+        <!-- Tower II -->
+        <div class="tower tower-2">
+            <div class="overlay overlay-t2"></div>
+            <div class="tower-content">
+                <div class="tower-circle">
+                    <span class="tower-number">II</span>
+                    <div class="hover-circle">
+                        <span class="plus-icon">+</span>
+                    </div>
+                </div>
+                <div class="tower-popover">
+                    <div class="tower-numeral">II</div>
+                    <div class="tower-label">TOWER</div>
+                    <div class="divider"></div>
+                    <div class="tower-details">
+                        <p>25 FLOOR PLANS</p>
+                        <p>1-4 BEDROOMS</p>
+                        <p>1,101-3,844 SQ FT</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Circle with tower label -->
-        <div class="circle">
-          <span class="tower-label">I</span>
-          <span class="plus-icon">+</span>
-        </div>
-        <!-- Popover content -->
-        <div class="popover">
-          <div class="popover-content">
-            <h2 class="heading-serif">TOWER I</h2>
-            <p class="status">SOLD OUT</p>
-          </div>
-        </div>
-      </div>
 
-      <!-- TOWER II -->
-      <div
-        class="tower tower-2"
-        data-tower="II"
-      >
-        <div class="hover-overlay">
-          <img
-            src="img/T2-hover.webp"
-            alt="Tower II"
-          />
+        <!-- Tower III -->
+        <div class="tower tower-3">
+            <div class="overlay overlay-t3"></div>
+            <div class="tower-content">
+                <div class="tower-circle">
+                    <span class="tower-number">III</span>
+                    <div class="hover-circle">
+                        <span class="plus-icon">+</span>
+                    </div>
+                </div>
+                <div class="tower-popover">
+                    <div class="tower-numeral">III</div>
+                    <div class="tower-label">TOWER</div>
+                    <div class="divider"></div>
+                    <div class="tower-details">
+                        <p>18 FLOOR PLANS</p>
+                        <p>2-3 BEDROOMS</p>
+                        <p>1,907-4,012 SQ FT</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="circle">
-          <span class="tower-label">II</span>
-          <span class="plus-icon">+</span>
-        </div>
-        <div class="popover">
-          <div class="popover-content">
-            <h2 class="heading-serif">TOWER II</h2>
-            <p class="description">x6 Apartments<br />671 – 149 m²</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- TOWER III -->
-      <div
-        class="tower tower-3"
-        data-tower="III"
-      >
-        <div class="hover-overlay">
-          <img
-            src="img/T3-hover.webp"
-            alt="Tower III"
-          />
-        </div>
-        <div class="circle">
-          <span class="tower-label">III</span>
-          <span class="plus-icon">+</span>
-        </div>
-        <div class="popover">
-          <div class="popover-content">
-            <h2 class="heading-serif">TOWER III</h2>
-            <p class="description">x5 Residences<br />2400 – 3850 SQ FT</p>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <!-- JS File -->
     <script src="tower-selection.js"></script>
-  </body>
+</body>
 </html>
